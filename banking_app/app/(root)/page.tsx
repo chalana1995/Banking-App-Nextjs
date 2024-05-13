@@ -1,19 +1,19 @@
-import HeaderBox from '@/components/HeaderBox'
-import TotalBalanceBox from '@/components/TotalBalanceBox'
-import React from 'react'
+import HeaderBox from "@/components/HeaderBox";
+import RightSidebar from "@/components/RightSidebar";
+import TotalBalanceBox from "@/components/TotalBalanceBox";
+import React from "react";
 
 const Home = () => {
-
-  const loggedIn = {firstName: 'Adrian'}
+  const loggedIn = { firstName: "Adrian", lastName: "JSM", email : "contact@jsmastry.com" };
 
   return (
-    <section className='home'>
-      <div className='home-content'>
-        <header className='home-header'>
+    <section className="home">
+      <div className="home-content">
+        <header className="home-header">
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn?.firstName || 'Guest'}
+            user={loggedIn?.firstName || "Guest"}
             subtext="Access and mange your account and transactions efficiently"
           />
 
@@ -24,8 +24,10 @@ const Home = () => {
           />
         </header>
       </div>
-    </section>
-  )
-}
 
-export default Home
+      <RightSidebar user={loggedIn} transactions={[]} banks={[]} />
+    </section>
+  );
+};
+
+export default Home;
