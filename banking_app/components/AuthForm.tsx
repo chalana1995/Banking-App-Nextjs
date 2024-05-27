@@ -4,6 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
+
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+});
+
+
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setuser] = useState(null);
 
@@ -31,6 +43,15 @@ const AuthForm = ({ type }: { type: string }) => {
           </h1>
         </div>
       </header>
+      {user ? (
+        <div className="flex flex-col gap-4">
+          {/* PladLink */}
+        </div>
+      ) : (
+        <>
+         FORM
+        </>
+      )}
     </section>
   );
 };
