@@ -21,9 +21,11 @@ import { Input } from "@/components/ui/input";
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const AuthForm = ({ type }: { type: string }) => {
-  const [user, setuser] = useState(null);
+  const router = useRouter();
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = authFormSchema(type);
@@ -38,12 +40,30 @@ const AuthForm = ({ type }: { type: string }) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-    setIsLoading(false);
-  }
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+
+    try {
+      if (type === "sign-up") {
+        // const newUser = await SignUp(data);
+        // setUser(newUser);
+      }
+
+      if (type === "sign-in") {
+        // const response = await SignIn({
+        //   email: data.email,
+        //   password: data.password,
+        // });
+
+        // if (response) {
+        //   router.push("/");
+        // }
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  };
 
   return (
     <section className="auth-form">
@@ -99,6 +119,12 @@ const AuthForm = ({ type }: { type: string }) => {
                     name="address"
                     label="Address"
                     placeholder="Enter Your Sfecipic Address"
+                  />
+                  <CustomInput
+                    control={form.control}
+                    name="city"
+                    label="City"
+                    placeholder="Enter Your City"
                   />
                   <div className="flex gap-4">
                     <CustomInput
